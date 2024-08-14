@@ -100,7 +100,7 @@ type Host struct {
 }
 
 func main() {
-	dirPath := "/home/jougan/OpenSource/meshery/server/meshmodel" // Change this to your directory path
+	dirPath := "/home/jougan/OpenSource/meshery/server/meshmodel/aad-pod-identity" // Change this to your directory path
 
 	// Create a channel for jobs and a wait group for synchronization
 	jobs := make(chan Job, 100)
@@ -408,7 +408,7 @@ func createNewRegistrant(oldRegistrantID uuid.UUID, hostname string) connection.
 	newRegistrant := connection.Connection{
 		Id:     oldRegistrantID,
 		Kind:   hostname,
-		Status: "connection.Registered",
+		Status: connection.Registered,
 		Type:   "registry",
 	}
 
@@ -419,6 +419,8 @@ func createNewRegistrant(oldRegistrantID uuid.UUID, hostname string) connection.
 		newRegistrant.Name = "GitHub"
 	case "kubernetes":
 		newRegistrant.Name = "Kubernetes"
+	case "meshery":
+		newRegistrant.Name = "Meshery"
 	default:
 		newRegistrant.Kind = "Unknown"
 	}
